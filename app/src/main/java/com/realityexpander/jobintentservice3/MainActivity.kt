@@ -7,6 +7,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.realityexpander.jobintentservice3.JobService.Companion.SHOW_RESULT
 
+// Based on: https://blog.joshsoftware.com/2018/11/22/jobintentservice-android-how-to-example/
+// Example: https://github.com/sambhaji213/JobIntentService
+
 class MainActivity : AppCompatActivity(), ServiceResultReceiver.Receiver {
 
     private var mServiceResultReceiver: ServiceResultReceiver? = null

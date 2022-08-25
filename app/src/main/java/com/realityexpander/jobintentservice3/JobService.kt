@@ -24,19 +24,24 @@ class JobService : JobIntentService() {
             when (intent.action) {
                 ACTION_DOWNLOAD -> {
                     mResultReceiver = intent.getParcelableExtra(RECEIVER)
+
                     var i = 0
                     while (i < 10) {
                         try {
-                            Thread.sleep(1000)
+                            Thread.sleep(1000) // simulate a long running task
+
                             val bundle = Bundle()
                             bundle.putString(
                                 "data",
-                                String.format("Showing From JobIntent Service %d", i)
+                                String.format("Showing data From JobIntent Service %d", i)
                             )
+
                             mResultReceiver!!.send(SHOW_RESULT, bundle)
+
                         } catch (e: InterruptedException) {
                             e.printStackTrace()
                         }
+
                         i++
                     }
                 }
@@ -66,6 +71,7 @@ class JobService : JobIntentService() {
             val intent = Intent(context, JobService::class.java)
             intent.putExtra(RECEIVER, workerResultReceiver)
             intent.action = ACTION_DOWNLOAD
+
             enqueueWork(
                 context!!,
                 JobService::class.java, DOWNLOAD_JOB_ID, intent
